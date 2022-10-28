@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.GameController">
+   <children>
+       <Canvas fx:id="canvas" height="805.0" layoutX="-2.0" layoutY="79.0" onMouseClicked="#onMousePressedPlaceObject" width="1000.0" />
+       <ToolBar layoutX="2.0" layoutY="-1.0" maxWidth="-Infinity" prefHeight="57.0" prefWidth="1000">
+        <items>
+            <ColorPicker fx:id="colorPicker" onAction="#setColorPicker" />
+          <Button fx:id="squareButton" mnemonicParsing="false" onAction="#onButtonPressSquare" text="Square" />
+            <Button fx:id="circleButton" mnemonicParsing="false" onAction="#onButtonPressCircle" text="Circle" />
+            <Button mnemonicParsing="false" onAction="#onButtonPressRectangle" text="Rectangle" />
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <Label text="Size" />
+            <Slider fx:id="slider" blockIncrement="100.0" majorTickUnit="100.0" max="500.0" min="10.0" prefHeight="14.0" prefWidth="274.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+            <ToggleButton mnemonicParsing="false" text="Select Mode" fx:id="selectModeButton" onAction="#selectMode" />
+        </items>
+      </ToolBar>
+
+   </children>
+</AnchorPane>
