@@ -1,18 +1,52 @@
 package com.example.demo.Model;
 
+import javafx.css.Size;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
-import static com.example.demo.Model.Shapes.CIRCLE;
-import static com.example.demo.Model.Shapes.SQUARE;
+import java.math.BigDecimal;
+
+import static com.example.demo.Model.Shapes.*;
 
 public class Factory {
 
 
-    public static ShapeRepository getShape(Position position, Size size, Shapes shapes, Color color){
-        if(SQUARE.equals(shapes)) return new Square(position,size,shapes,color);
-        else if (CIRCLE.equals(shapes)) return new Circle(position,size,shapes,color);
+    private double positionY;
+    private double positionX;
+    private double size;
+    private Color color;
+    private Shapes shape;
 
-        return null;
+    public Factory setPositionY(double positionY) {
+        this.positionY = positionY;
+        return this;
+    }
+
+    public Factory setPositionX(double positionX) {
+        this.positionX = positionX;
+        return this;
+    }
+
+    public Factory setSize(double size) {
+        this.size = size;
+        return this;
+    }
+
+    public Factory setColor(Color color) {
+        this.color = color;
+        return this;
+    }
+
+    public Factory setShape(Shapes shape) {
+        this.shape = shape;
+        return this;
+    }
+
+    public ModelTemplate build(Shapes shape){
+                return new Square(positionX, positionY, size);
+
+
     }
 
 

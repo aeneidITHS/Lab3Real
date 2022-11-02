@@ -1,42 +1,17 @@
 package com.example.demo.Model;
 
-import javafx.scene.paint.Color;
+import javafx.scene.canvas.GraphicsContext;
 
-public class Square extends ShapeRepository {
-    private Position position;
-    private Size size;
-    private Shapes shape;
-    private Color color;
+public class Square extends ModelTemplate{
 
-    public Square(Position position,Size size,Shapes shape,Color color){
-        this.shape = shape;
-        this.size = size;
-        this.color = color;
-        this.position = position;
+    public Square(double x, double y, double size){
+        super(x,y,size);
+
     }
 
     @Override
-    public Shapes getShape() {
-        return this.shape;
-    }
-
-    @Override
-    public Position getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public Size getSize() {
-        return this.size;
-    }
-
-    @Override
-    public Color getColor() {
-        return this.color;
-    }
-
-    @Override
-    public String ShapetoString() {
-        return ""+ shape;
+    public void draw(GraphicsContext context) {
+        context.setFill(getColor());
+        context.fillRect(getPositionX(),getPositionY(),getSize(),getSize());
     }
 }

@@ -12,7 +12,7 @@
             <ColorPicker fx:id="colorPicker" onAction="#setColorPicker" />
           <Button fx:id="squareButton" mnemonicParsing="false" onAction="#onButtonPressSquare" text="Square" />
             <Button fx:id="circleButton" mnemonicParsing="false" onAction="#onButtonPressCircle" text="Circle" />
-            <Button mnemonicParsing="false" onAction="#onButtonPressRectangle" text="Rectangle" />
+            <Button mnemonicParsing="false"  text="Rectangle" />
             <MenuButton mnemonicParsing="false" text="MenuButton">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />

@@ -1,42 +1,21 @@
 package com.example.demo.Model;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Circle extends ShapeRepository {
-    private Position position;
-    private Size size;
-    private Shapes shape;
-    private Color color;
+public class Circle extends ModelTemplate {
 
-    public Circle(Position position,Size size,Shapes shape,Color color){
-        this.shape = shape;
-        this.size = size;
-        this.color = color;
-        this.position = position;
+
+    public Circle(double x,double y, double size ){
+        super(x,y,size);
+
     }
 
     @Override
-    public Shapes getShape() {
-        return this.shape;
+    public void draw(GraphicsContext context) {
+        context.setFill(getColor());
+        context.fillOval(getPositionX(),getPositionY(),getSize(),getSize());
     }
 
-    @Override
-    public Position getPosition() {
-        return this.position;
-    }
 
-    @Override
-    public Size getSize() {
-        return this.size;
-    }
-
-    @Override
-    public Color getColor() {
-        return this.color;
-    }
-
-    @Override
-    public String ShapetoString() {
-        return ""+shape;
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.*;
+import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -27,8 +28,7 @@ public class GameController {
     Group root = new Group();
     public Canvas canvas = new Canvas(805,1000);
     Shapes chosenShape;
-    Size sizeSquare = new Size(100,100,0,0);
-    Size sizeCircle = new Size(100,100,100,100);
+    ModelRepository modelRepository = new ModelRepository();
     public Button squareButton;
     public Button circleButton;
     public ToggleButton selectModeButton;
@@ -37,17 +37,15 @@ public class GameController {
     public Button rectangleButton;
     public Color c;
     public GraphicsContext context;
-    public ObservableList<ShapeRepository> savedShapeRepositories = FXCollections.observableArrayList();
     double newSize;
-
-
+    MouseEvent clickedOnCanvas;
     public void initialize(){
-        context=canvas.getGraphicsContext2D();
-        slider.valueProperty().addListener((observableValue, number, t1) -> {
-            sizeSquare =new Size(newSize,newSize,0,0);
-            sizeCircle = new Size(newSize,newSize,newSize,newSize);
-        });
-        render();
+        context= canvas.getGraphicsContext2D();
+        slider.valueProperty().bindBidirectional(modelRepository.sizeProperty());
+        //modelRepository.getShapeObservableList().addListener(this::listChanged);
+
+
+
 
     }
 public void setColorPicker(){
@@ -66,45 +64,48 @@ public void setColorPicker(){
         normalOperations.bind(selectMode);
         return selectMode.getValue();
     }
-    public void onButtonPressRectangle(){
-        chosenShape=chosenShape.RECTANGLE;
-    }
+
     public void render(){
         context.setFill(Color.GREEN);
     }
+    public void listChanged(Observable observable){
+        for (ModelTemplate s:
+                modelRepository.getShapeObservableList() ) {
+            modelRepository.drawCircle(context);
 
+        }
+    }
     public void onMousePressedPlaceObject(MouseEvent event){
-        Position temp1 = new Position(event.getX(),event.getY());
-        Square temp = new Square(temp1,null,null,null);
-        ShapeRepository element = temp;
+
         if (selectMode()) {
-            System.out.println(temp1.x()+ ","+ temp1.y()+ "\n--------");
-            context.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-            context.fillRect(event.getX(),event.getY(),sizeSquare.x(),sizeSquare.y());
+            modelRepository.contains(event.getX(), event.getY(),context,canvas);
+            for (ModelTemplate s:
+                    modelRepository.getShapeObservableList()) {
+                System.out.println(s);
+                s.draw(context);
+
+            }
 
         }
         else if (!selectMode()) {
 
+            modelRepository.setColor(colorPicker.getValue());
+            modelRepository.setPositionX(event.getX());
+            modelRepository.setPositionY(event.getY());
+            modelRepository.setShape(chosenShape);
+            modelRepository.build();
             switch (chosenShape) {
-                case SQUARE -> {
-                    System.out.println("Check 1");
-                    context.fillRect(100,100,sizeSquare.x(),sizeSquare.y());
-                    System.out.println("check 2");
-                    savedShapeRepositories.add(Factory.getShape(new Position(event.getX(), event.getY()), sizeSquare, chosenShape, c));
-
-                }
-                case CIRCLE -> {
-                    context.setFill(c);
-                    context.fillRoundRect(event.getX(), event.getY(), sizeCircle.x(), sizeCircle.y(), sizeCircle.z(), sizeCircle.w());
-
+                case SQUARE ->
+                modelRepository.drawSquare(context);
+                case CIRCLE ->
+                    modelRepository.drawCircle(context);
+            }
                 }
             }
-        }
-    }
-    private <C,T> List<T> valueGrabber(List<C> items, Function<C,T> func){
-        return items.stream().map(func).collect(Collectors.toList());
-    }
-
 
 
 }
+
+
+
+
