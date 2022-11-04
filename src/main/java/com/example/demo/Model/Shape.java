@@ -3,23 +3,23 @@ package com.example.demo.Model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public abstract class ModelTemplate  {
+public abstract class Shape {
     private final double positionX;
     private final double positionY;
     private  double size;
-    private Shapes shape;
+    private ShapeType shape;
     private   Color color;
 
-    public ModelTemplate(double positionX, double positionY, double size){
+    public Shape(double positionX, double positionY, double size, Color color){
 
         this.size = size;
-        color = getColor();
+        this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
     }
 
 
-    public Shapes getShape() {
+    public ShapeType getShape() {
         return this.shape;
     }
 
@@ -51,11 +51,13 @@ public abstract class ModelTemplate  {
         this.color = color;
     }
     public abstract void draw(GraphicsContext context);
+    public abstract boolean find(double findX,double findY,double size);
 
-   public static ModelTemplate createShape(Shapes shape,double x, double y, double size){
+
+   public static Shape createShape(ShapeType shape, double x, double y, double size, Color color){
        return switch (shape){
-           case CIRCLE -> new Circle(x,y,size);
-           case SQUARE -> new Square(x, y, size);
+           case CIRCLE -> new Circle(x,y,size,color);
+           case SQUARE -> new Square(x, y, size,color);
        };
    }
 

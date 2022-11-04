@@ -1,6 +1,6 @@
 package com.example.demo.Model;
 
-public enum Shapes {
+public enum ShapeType {
     SQUARE,
     CIRCLE,
 
