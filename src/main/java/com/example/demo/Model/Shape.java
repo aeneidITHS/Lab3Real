@@ -60,7 +60,7 @@ public abstract class Shape {
            case SQUARE -> new Square(x, y, size,color);
        };
    }
-
+   public abstract String convertToSVG();
 
 
 }

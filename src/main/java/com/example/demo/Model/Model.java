@@ -5,6 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Model {
     DoubleProperty positionX = new SimpleDoubleProperty();
     DoubleProperty positionY = new SimpleDoubleProperty();
@@ -88,7 +92,9 @@ public class Model {
         shapeObservableList.add(shape);
 
     }
-
+    public void remove(){
+        shapeObservableList.remove(shapeObservableList.size()-1);
+    }
     public void find(double findX, double findY) {
         for (Shape s :
                 shapeObservableList) {
@@ -104,6 +110,7 @@ public class Model {
         }
 
     }
+
 }
 
 

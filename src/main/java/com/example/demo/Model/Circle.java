@@ -15,13 +15,21 @@ public class Circle extends Shape {
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(getColor());
-        context.fillOval(getPositionX(), getPositionY(), getSize(), getSize());
+        context.fillOval(getPositionX()-(getSize()/2), getPositionY()-(getSize()/2), getSize(), getSize());
     }
 
     @Override
     public boolean find(double findX, double findY, double size) {
-        Rectangle shape = new Rectangle(getPositionX(), getPositionY(), size, size);
-        return shape.contains(findX, findY);
+        double a = (findX-getPositionX());
+        double b = (findY-getPositionY());
+        double distance = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+        return (distance<=(getSize()/2));
+    }
+
+    @Override
+    public String convertToSVG() {
+        String color = "#" + getColor().toString().substring(2,10);
+        return "<circle cx=\""+ (getPositionX()-(getSize()/2)) + "\" cy=\"" +(getPositionY()-(getSize()/2)) + "\" r=\"" +getSize() + "\" fill=\""+ "black" + "\"/>";
     }
 
 

@@ -23,4 +23,10 @@ public class Square extends Shape {
         context.setFill(getColor());
         context.fillRect(getPositionX(), getPositionY(), getSize(), getSize());
     }
+
+    @Override
+    public String convertToSVG() {
+        String color = "#" + getColor().toString().substring(2,10);
+        return "<rectangle x=\""+ getPositionX() + "\" y=\"" +getPositionY() + "\" width=\"" + getSize() + "\" height=\"" + getSize() + "\" fill=\""+ "black" + "\" stroke-width=\"" + 4 + "\" stroke=\""+ "black" +"\"/>" ;
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.*;
+import com.example.demo.Model.SVGSaver;
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -26,11 +28,11 @@ public class GameController {
     public ToggleButton selectModeButton;
     public Slider slider;
     public ColorPicker colorPicker = new ColorPicker();
-    public Button rectangleButton;
+
     public Color c;
     public GraphicsContext context;
-    double newSize;
-    MouseEvent clickedOnCanvas;
+
+
 
     public void initialize() {
         context = canvas.getGraphicsContext2D();
@@ -54,7 +56,12 @@ public class GameController {
     public void onButtonPressCircle() {
         chosenShape = ShapeType.CIRCLE;
     }
-
+    public void undo(ActionEvent event){
+        modelRepository.remove();
+    }
+    public void save(){
+        SVGSaver.save(modelRepository);
+    }
     public boolean selectMode() {
         BooleanProperty selectMode = selectModeButton.selectedProperty();
         BooleanProperty normalOperations = new SimpleBooleanProperty(false);
