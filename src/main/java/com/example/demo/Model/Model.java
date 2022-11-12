@@ -5,106 +5,90 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Model {
-    DoubleProperty positionX = new SimpleDoubleProperty();
-    DoubleProperty positionY = new SimpleDoubleProperty();
-    DoubleProperty size = new SimpleDoubleProperty();
-    ObjectProperty<ShapeType> shape = new SimpleObjectProperty<>();
-    ObjectProperty<Color> color = new SimpleObjectProperty<>();
+    DoubleProperty createPositionX = new SimpleDoubleProperty();
+    DoubleProperty createPositionY = new SimpleDoubleProperty();
+    DoubleProperty createShapeSize = new SimpleDoubleProperty();
+    ObjectProperty<ShapeType> createShapeType = new SimpleObjectProperty<>();
+    ObjectProperty<Color> createShapeColor = new SimpleObjectProperty<>();
 
 
     ObservableList<Shape> shapeObservableList = FXCollections.observableArrayList();
+
+
+
 
     public ObservableList<Shape> getShapeObservableList() {
         return shapeObservableList;
     }
 
-    public void setShapeObservableList(ObservableList<Shape> shapeObservableList) {
-        this.shapeObservableList = shapeObservableList;
+    public double getCreatePositionY() {
+        return createPositionY.get();
     }
 
-    public double getPositionY() {
-        return positionY.get();
+    public void setCreatePositionY(double createPositionY) {
+        this.createPositionY.set(createPositionY);
+    }
+    
+
+    public double getCreatePositionX() {
+        return createPositionX.get();
     }
 
-    public void setPositionY(double positionY) {
-        this.positionY.set(positionY);
+    public void setCreatePositionX(double createPositionX) {
+        this.createPositionX.set(createPositionX);
     }
 
-    public DoubleProperty positionYProperty() {
-        return positionY;
+    public double getCreateShapeSize() {
+        return createShapeSize.get();
     }
 
-    public double getPositionX() {
-        return positionX.get();
+    public void setCreateShapeSize(double createShapeSize) {
+        this.createShapeSize.set(createShapeSize);
     }
 
-    public void setPositionX(double positionX) {
-        this.positionX.set(positionX);
+    public DoubleProperty createShapeSizeProperty() {
+        return createShapeSize;
     }
 
-    public DoubleProperty positionXProperty() {
-        return positionX;
+    public ShapeType getCreateShapeType() {
+        return createShapeType.get();
     }
 
-    public double getSize() {
-        return size.get();
+    public void setCreateShapeType(ShapeType createShapeType) {
+        this.createShapeType.set(createShapeType);
     }
 
-    public void setSize(double size) {
-        this.size.set(size);
+    public Color getCreateShapeColor() {
+        return createShapeColor.get();
     }
 
-    public DoubleProperty sizeProperty() {
-        return size;
+    public void setCreateShapeColor(Color createShapeColor) {
+        this.createShapeColor.set(createShapeColor);
     }
 
-    public ShapeType getShape() {
-        return shape.get();
+    public ObjectProperty<Color> createShapeColorProperty() {
+        return createShapeColor;
     }
 
-    public void setShape(ShapeType shape) {
-        this.shape.set(shape);
-    }
-
-    public ObjectProperty<ShapeType> shapesProperty() {
-        return shape;
-    }
-
-    public Color getColor() {
-        return color.get();
-    }
-
-    public void setColor(Color color) {
-        this.color.set(color);
-    }
-
-    public ObjectProperty<Color> colorProperty() {
-        return color;
-    }
-
-    public void add() {
-        Shape shape = Shape.createShape(getShape(), getPositionX(), getPositionY(), getSize(), getColor());
+    public void constructShape() {
+        Shape shape = Shape.createShape(getCreateShapeType(), getCreatePositionX(), getCreatePositionY(), getCreateShapeSize(), getCreateShapeColor());
         shapeObservableList.add(shape);
 
     }
-    public void remove(){
+    public void pop(){
         shapeObservableList.remove(shapeObservableList.size()-1);
     }
-    public void find(double findX, double findY) {
+    public void modifySelectedShapes(double x, double y) {
         for (Shape s :
                 shapeObservableList) {
-            if (s.find(findX, findY, s.getSize())) {
+            if (s.contains(x, y)) {
                 shapeObservableList.remove(s);
-                setPositionY(s.getPositionY());
-                setPositionX(s.getPositionX());
-                setSize(getSize());
-                setColor(getColor());
-                add();
+                setCreatePositionY(s.getPositionY());
+                setCreatePositionX(s.getPositionX());
+                setCreateShapeSize(getCreateShapeSize());
+                setCreateShapeColor(getCreateShapeColor());
+                constructShape();
             }
 
         }

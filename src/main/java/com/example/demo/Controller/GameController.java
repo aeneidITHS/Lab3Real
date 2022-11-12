@@ -5,8 +5,6 @@ import com.example.demo.Model.SVGSaver;
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -19,9 +17,8 @@ import static com.example.demo.Model.ShapeType.SQUARE;
 
 public class GameController {
 
-    Group root = new Group();
     public Canvas canvas = new Canvas(805, 1000);
-    ShapeType chosenShape;
+    ShapeType chosenShape = SQUARE;
     Model modelRepository = new Model();
     public Button squareButton;
     public Button circleButton;
@@ -29,35 +26,35 @@ public class GameController {
     public Slider slider;
     public ColorPicker colorPicker = new ColorPicker();
 
-    public Color c;
+    public Color color;
     public GraphicsContext context;
 
 
 
     public void initialize() {
         context = canvas.getGraphicsContext2D();
-        slider.valueProperty().bindBidirectional(modelRepository.sizeProperty());
+        slider.valueProperty().bindBidirectional(modelRepository.createShapeSizeProperty());
         modelRepository.getShapeObservableList().addListener(this::listChanged);
-        colorPicker.valueProperty().bindBidirectional(modelRepository.colorProperty());
+        colorPicker.valueProperty().bindBidirectional(modelRepository.createShapeColorProperty());
 
 
     }
 
     public void setColorPicker() {
         colorPicker.setOnAction(e -> {
-            c = colorPicker.getValue();
+            color = colorPicker.getValue();
         });
     }
 
     public void onButtonPressSquare() {
-        chosenShape = SQUARE;
+        chosenShape = ShapeType.SQUARE;
     }
 
     public void onButtonPressCircle() {
         chosenShape = ShapeType.CIRCLE;
     }
-    public void undo(ActionEvent event){
-        modelRepository.remove();
+    public void undo(){
+        modelRepository.pop();
     }
     public void save(){
         SVGSaver.save(modelRepository);
@@ -71,8 +68,7 @@ public class GameController {
 
     public void listChanged(Observable observable) {
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (Shape s :
-                modelRepository.getShapeObservableList()) {
+        for (Shape s : modelRepository.getShapeObservableList()) {
             s.draw(context);
         }
     }
@@ -81,17 +77,18 @@ public class GameController {
 
         if (selectMode()) {
             try {
-                modelRepository.find(event.getX(), event.getY());
+                modelRepository.modifySelectedShapes(event.getX(), event.getY());
             } catch (ConcurrentModificationException ignored) {
+                System.out.println("Concurrent modification ignored");
             }
 
         } else if (!selectMode()) {
 
-            modelRepository.setColor(colorPicker.getValue());
-            modelRepository.setPositionX(event.getX());
-            modelRepository.setPositionY(event.getY());
-            modelRepository.setShape(chosenShape);
-            modelRepository.add();
+            modelRepository.setCreateShapeColor(colorPicker.getValue());
+            modelRepository.setCreatePositionX(event.getX());
+            modelRepository.setCreatePositionY(event.getY());
+            modelRepository.setCreateShapeType(chosenShape);
+            modelRepository.constructShape();
 
         }
 

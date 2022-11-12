@@ -19,9 +19,9 @@ public class Circle extends Shape {
     }
 
     @Override
-    public boolean find(double findX, double findY, double size) {
-        double a = (findX-getPositionX());
-        double b = (findY-getPositionY());
+    public boolean contains(double x, double y) {
+        double a = (x-getPositionX());
+        double b = (y-getPositionY());
         double distance = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
         return (distance<=(getSize()/2));
     }
@@ -29,7 +29,7 @@ public class Circle extends Shape {
     @Override
     public String convertToSVG() {
         String color = "#" + getColor().toString().substring(2,10);
-        return "<circle cx=\""+ (getPositionX()-(getSize()/2)) + "\" cy=\"" +(getPositionY()-(getSize()/2)) + "\" r=\"" +getSize() + "\" fill=\""+ "black" + "\"/>";
+        return "<circle cx=\""+ (getPositionX()-(getSize()/2)) + "\" cy=\"" +(getPositionY()-(getSize()/2)) + "\" r=\"" +getSize() + "\" fill=\""+ color + "\"/>";
     }
 
 

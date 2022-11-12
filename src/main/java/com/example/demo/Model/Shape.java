@@ -6,21 +6,15 @@ import javafx.scene.paint.Color;
 public abstract class Shape {
     private final double positionX;
     private final double positionY;
-    private  double size;
-    private ShapeType shape;
-    private   Color color;
+    private double size;
+    private Color color;
 
-    public Shape(double positionX, double positionY, double size, Color color){
+    public Shape(double positionX, double positionY, double size, Color color) {
 
         this.size = size;
         this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
-    }
-
-
-    public ShapeType getShape() {
-        return this.shape;
     }
 
 
@@ -43,24 +37,19 @@ public abstract class Shape {
         return this.color;
     }
 
-    public void setSize(double size) {
-        this.size = size;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
     public abstract void draw(GraphicsContext context);
-    public abstract boolean find(double findX,double findY,double size);
+
+    public abstract boolean contains(double findX, double findY);
 
 
-   public static Shape createShape(ShapeType shape, double x, double y, double size, Color color){
-       return switch (shape){
-           case CIRCLE -> new Circle(x,y,size,color);
-           case SQUARE -> new Square(x, y, size,color);
-       };
-   }
-   public abstract String convertToSVG();
+    public static Shape createShape(ShapeType shapeType, double x, double y, double size, Color color) {
+        return switch (shapeType) {
+            case CIRCLE -> new Circle(x, y, size, color);
+            case SQUARE -> new Square(x, y, size, color);
+        };
+    }
+
+    public abstract String convertToSVG();
 
 
 }
