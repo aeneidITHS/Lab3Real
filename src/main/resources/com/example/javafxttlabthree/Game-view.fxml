@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0"
             prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.demo.Controller.GameController">
+            fx:controller="com.example.javafxttlabthree.Controller.GameController">
     <Canvas fx:id="canvas" height="805.0" layoutX="-2.0" layoutY="79.0" onMouseClicked="#onMousePressedPlaceObject"
             width="1000.0"/>
     <ToolBar layoutX="1.0" maxWidth="-Infinity" prefHeight="57.0" prefWidth="1000">

@@ -1,12 +1,13 @@
 module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.junit.jupiter.api;
 
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
-    exports com.example.demo.Controller;
-    opens com.example.demo.Controller to javafx.fxml;
-    exports com.example.demo.Model;
-    opens com.example.demo.Model to javafx.fxml;
+    opens com.example.javafxttlabthree to javafx.fxml;
+    exports com.example.javafxttlabthree;
+    exports com.example.javafxttlabthree.Controller;
+    opens com.example.javafxttlabthree.Controller to javafx.fxml;
+    exports com.example.javafxttlabthree.Model;
+    opens com.example.javafxttlabthree.Model to javafx.fxml;
 }
