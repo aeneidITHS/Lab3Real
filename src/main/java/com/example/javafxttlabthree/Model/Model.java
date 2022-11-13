@@ -1,5 +1,7 @@
 package com.example.javafxttlabthree.Model;
 
+import com.example.javafxttlabthree.Shapes.Shape;
+import com.example.javafxttlabthree.Shapes.ShapeType;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

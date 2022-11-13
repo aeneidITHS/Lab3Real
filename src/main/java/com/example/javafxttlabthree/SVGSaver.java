@@ -1,5 +1,7 @@
-package com.example.javafxttlabthree.Model;
+package com.example.javafxttlabthree;
 
+import com.example.javafxttlabthree.Model.Model;
+import com.example.javafxttlabthree.Shapes.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 

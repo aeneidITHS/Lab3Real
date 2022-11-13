@@ -1,5 +1,6 @@
-package com.example.javafxttlabthree.Model;
+package com.example.javafxttlabthree.Shapes;
 
+import com.example.javafxttlabthree.Shapes.Shape;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

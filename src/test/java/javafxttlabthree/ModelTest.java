@@ -1,9 +1,9 @@
-package com.example.javafxttlabthree;
+package javafxttlabthree;
 
-import com.example.javafxttlabthree.Model.Circle;
+import com.example.javafxttlabthree.Shapes.Circle;
 import com.example.javafxttlabthree.Model.Model;
-import com.example.javafxttlabthree.Model.ShapeType;
-import com.example.javafxttlabthree.Model.Square;
+import com.example.javafxttlabthree.Shapes.ShapeType;
+import com.example.javafxttlabthree.Shapes.Square;
 import javafx.scene.paint.Color;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -33,8 +33,9 @@ public class ModelTest {
     void modifySelectedShapes() {
         model.getShapeObservableList().add(square);
         model.setCreateShapeSize(10);
-        model.modifySelectedShapes(model.getShapeObservableList().get(1).getPositionX(), model.getShapeObservableList().get(1).getPositionY());
-        assertEquals(10,model.getShapeObservableList().get(1).getSize());
+        model.setCreateShapeType(ShapeType.SQUARE);
+        model.modifySelectedShapes(model.getShapeObservableList().get(0).getPositionX(), model.getShapeObservableList().get(0).getPositionY());
+        assertEquals(10,model.getShapeObservableList().get(0).getSize());
 
     }
 }

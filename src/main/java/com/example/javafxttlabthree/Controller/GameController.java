@@ -1,7 +1,9 @@
 package com.example.javafxttlabthree.Controller;
 
 import com.example.javafxttlabthree.Model.*;
-import com.example.javafxttlabthree.Model.SVGSaver;
+import com.example.javafxttlabthree.SVGSaver;
+import com.example.javafxttlabthree.Shapes.Shape;
+import com.example.javafxttlabthree.Shapes.ShapeType;
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -13,7 +15,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ConcurrentModificationException;
 
-import static com.example.javafxttlabthree.Model.ShapeType.SQUARE;
+import static com.example.javafxttlabthree.Shapes.ShapeType.SQUARE;
 
 public class GameController {
 

@@ -1,4 +1,4 @@
-package com.example.javafxttlabthree.Model;
+package com.example.javafxttlabthree.Shapes;
 
 public enum ShapeType {
     SQUARE,
